@@ -1,0 +1,12 @@
+<div class="flex flex-wrap justify-center gap-6 pt-6">
+    <h1 class="text-3xl w-full text-center">Happy 1 Jahr Beziehung mit dir! &#128538;</h1>
+    @if (this.showSusCat()) {
+        <img src="https://media.tenor.com/JfMCn-1dU18AAAAe/chinese-cat-side-eye.png" />
+    } @else {
+        <img src="https://media.tenor.com/WsWej1C3ePYAAAAM/yippee-cat-kitty.gif" />
+    }
+    
+    <span class="w-full text-center">Möchtest du mit mir auf ein Date gehen? &#128073; &#128072;</span>
+    <button mat-button class="w-fit" routerLink="/food">Ja💖</button>
+    <button mat-button class="w-fit" (click)="handleNee()">Nee</button>
+</div>
