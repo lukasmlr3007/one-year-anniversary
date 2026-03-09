@@ -35,15 +35,16 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        # WICHTIG: <dein-repo-name> durch den tatsächlichen Repository-Namen ersetzen!
-        # Das --base-href Flag ist notwendig, damit Routing korrekt funktioniert.
         run: npm run build -- --configuration production --base-href "/one-year-anniversary/"
+
+      - name: Fix routing – copy index.html to 404.html
+        # GitHub Pages liefert 404.html bei unbekannten Pfaden aus.
+        # Angular fängt die Route dann clientseitig ab.
+        run: cp dist/one-year-anniversary/browser/index.html dist/one-year-anniversary/browser/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Angular 17+ baut nach dist/<projektname>/browser, ältere nach dist/<projektname>
-          # Pfad ggf. anpassen!
           path: "./dist/one-year-anniversary/browser"
 
   deploy:
