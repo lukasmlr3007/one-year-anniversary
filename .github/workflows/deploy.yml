@@ -3,8 +3,8 @@ name: Deploy Angular to GitHub Pages
 on:
   push:
     branches:
-      - main  # Trigger bei Push auf main
-  workflow_dispatch: # Manuelles Auslösen möglich
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -38,9 +38,9 @@ jobs:
         run: npm run build -- --configuration production --base-href "/one-year-anniversary/"
 
       - name: Fix routing – copy index.html to 404.html
-        # GitHub Pages liefert 404.html bei unbekannten Pfaden aus.
-        # Angular fängt die Route dann clientseitig ab.
-        run: cp dist/one-year-anniversary/browser/index.html dist/one-year-anniversary/browser/404.html
+        run: |
+          cp dist/one-year-anniversary/browser/index.csr.html dist/one-year-anniversary/browser/index.html
+          cp dist/one-year-anniversary/browser/index.csr.html dist/one-year-anniversary/browser/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
